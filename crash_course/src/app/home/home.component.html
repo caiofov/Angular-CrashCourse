@@ -1,14 +1,6 @@
-<div class="col gap-1">
-  <!-- Add product button -->
-  <button
-    pButton
-    icon="pi pi-plus"
-    (click)="toggleAddPopup()"
-    label="Add new product"
-  ></button>
-
+<div class="column full-height gap-1 space-between align-center">
   <!-- products -->
-  <div class="row wrap gap-1 space-between">
+  <div class="row wrap gap-2 space-between align-center full-height">
     <app-product
       *ngFor="let product of products"
       [product]="product"
@@ -27,6 +19,15 @@
   >
   </p-paginator>
 </div>
+
+<!-- Add product button -->
+<button
+  pButton
+  icon="pi pi-plus"
+  (click)="toggleAddPopup()"
+  label="Add new product"
+  class="add-product-btn"
+></button>
 
 <!-- Edit Product -->
 <app-edit-popup
