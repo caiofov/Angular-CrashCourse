@@ -71,10 +71,12 @@ export class HomeComponent {
     console.log(error);
   }
 
-  onRequestSucceed(data: any) {
-    console.log(data);
-    this.fetchProducts(0, this.rows);
-    this.resetPaginator();
+  onRequestSucceed() {
+    return (data: any) => {
+      console.log(data);
+      this.fetchProducts(0, this.rows);
+      this.resetPaginator();
+    };
   }
 
   fetchProducts(page: number, perPage: number) {
@@ -89,21 +91,21 @@ export class HomeComponent {
 
   editProduct(product: Product) {
     this.productsService.editProduct(product).subscribe({
-      next: this.onRequestSucceed,
+      next: this.onRequestSucceed(),
       error: this.onRequestError,
     });
   }
 
   deleteProduct(product: Product) {
     this.productsService.deleteProduct(product.id).subscribe({
-      next: this.onRequestSucceed,
+      next: this.onRequestSucceed(),
       error: this.onRequestError,
     });
   }
 
   addProduct(product: Product) {
     this.productsService.addProduct(product).subscribe({
-      next: this.onRequestSucceed,
+      next: this.onRequestSucceed(),
       error: this.onRequestError,
     });
   }
