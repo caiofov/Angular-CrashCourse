@@ -22,51 +22,43 @@ export class HomeComponent {
     this.fetchProducts(event.page, event.rows);
   }
 
+  onRequestError(error: any) {
+    console.log(error);
+  }
+
+  onRequestSucceed(data: any) {
+    console.log(data);
+    this.fetchProducts(0, this.rows);
+  }
+
   fetchProducts(page: number, perPage: number) {
     this.productsService.getProducts({ page, perPage }).subscribe({
       next: (products) => {
         this.products = products.items;
         this.totalRecords = products.total;
       },
-      error: (error) => {
-        console.log(error);
-      },
+      error: this.onRequestError,
     });
   }
 
   editProduct(product: Product) {
     this.productsService.editProduct(product).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.fetchProducts(0, this.rows);
-      },
-      error: (error) => {
-        console.log(error);
-      },
+      next: this.onRequestSucceed,
+      error: this.onRequestError,
     });
   }
 
   deleteProduct(product: Product) {
     this.productsService.deleteProduct(product.id).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.fetchProducts(0, this.rows);
-      },
-      error: (error) => {
-        console.log(error);
-      },
+      next: this.onRequestSucceed,
+      error: this.onRequestError,
     });
   }
 
   addProduct(product: Product) {
     this.productsService.addProduct(product).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.fetchProducts(0, this.rows);
-      },
-      error: (error) => {
-        console.log(error);
-      },
+      next: this.onRequestSucceed,
+      error: this.onRequestError,
     });
   }
 
