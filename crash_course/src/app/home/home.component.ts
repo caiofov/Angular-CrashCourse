@@ -23,13 +23,53 @@ export class HomeComponent {
   }
 
   fetchProducts(page: number, perPage: number) {
-    this.productsService
-      .getProducts('http://localhost:3000/clothes', { page, perPage })
-      .subscribe((products) => {
+    this.productsService.getProducts({ page, perPage }).subscribe({
+      next: (products) => {
         this.products = products.items;
         this.totalRecords = products.total;
-      });
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
+
+  editProduct(product: Product) {
+    this.productsService.editProduct(product).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.fetchProducts(0, this.rows);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  deleteProduct(product: Product) {
+    this.productsService.deleteProduct(product.id).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.fetchProducts(0, this.rows);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  addProduct(product: Product) {
+    this.productsService.addProduct(product).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.fetchProducts(0, this.rows);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
   ngOnInit() {
     this.fetchProducts(0, this.rows);
   }
