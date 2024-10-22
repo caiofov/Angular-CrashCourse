@@ -23,14 +23,25 @@ export class ApiService {
   }
 
   put<T, B>(url: string, body: B, options: OptionsType): Observable<T> {
-    return this.httpClient.put<T>(url, body, options) as Observable<T>;
+    return this.httpClient.put<T>(
+      `${this.baseURL}/${url}`,
+      body,
+      options
+    ) as Observable<T>;
   }
 
   post<T, B>(url: string, body: B, options: OptionsType): Observable<T> {
-    return this.httpClient.post<T>(url, body, options) as Observable<T>;
+    return this.httpClient.post<T>(
+      `${this.baseURL}/${url}`,
+      body,
+      options
+    ) as Observable<T>;
   }
 
   delete<T>(url: string, options: OptionsType): Observable<T> {
-    return this.httpClient.delete<T>(url, options) as Observable<T>;
+    return this.httpClient.delete<T>(
+      `${this.baseURL}/${url}`,
+      options
+    ) as Observable<T>;
   }
 }
