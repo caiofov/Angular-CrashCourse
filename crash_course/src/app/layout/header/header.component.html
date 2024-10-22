@@ -5,4 +5,13 @@
     alt="Logo Image"
     class="logo"
   />
+  <div class="row gap-1">
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Home</a
+    >
+    <a routerLink="/about-us" routerLinkActive="active">About us</a>
+  </div>
 </header>
