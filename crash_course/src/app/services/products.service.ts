@@ -8,7 +8,7 @@ import { PaginationParams, Product, ProductsResponse } from '../../types';
 })
 export class ProductsService {
   constructor(private apiService: ApiService) {
-    apiService.setBaseURL('http://localhost:3000/'); //TODO: env
+    apiService.setBaseURL('http://localhost:3000'); //TODO: env
   }
 
   getProducts = (params: PaginationParams): Observable<ProductsResponse> => {
@@ -18,15 +18,15 @@ export class ProductsService {
     });
   };
 
-  addProduct = (body: Product): Observable<ProductsResponse> => {
+  addProduct = (body: Product): Observable<Product> => {
     return this.apiService.post('clothes', body, {});
   };
 
-  editProduct = (body: Product): Observable<ProductsResponse> => {
+  editProduct = (body: Product): Observable<Product> => {
     return this.apiService.put(`clothes/${body.id}`, body, {});
   };
 
-  deleteProduct = (id: number): Observable<ProductsResponse> => {
+  deleteProduct = (id: number): Observable<any> => {
     return this.apiService.delete(`clothes/${id}`, {});
   };
 }
