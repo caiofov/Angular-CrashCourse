@@ -12,6 +12,8 @@ import { ButtonModule } from 'primeng/button';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { CardModule } from 'primeng/card';
+import { PricePipe } from '../../pipes/price.pipe';
+import { TruncateNamePipe } from '../../pipes/truncate-name.pipe';
 
 @Component({
   selector: 'app-product',
@@ -22,6 +24,8 @@ import { CardModule } from 'primeng/card';
     ButtonModule,
     ConfirmPopupModule,
     CardModule,
+    PricePipe,
+    TruncateNamePipe,
   ],
   providers: [ConfirmationService],
   templateUrl: './product.component.html',

@@ -1,4 +1,7 @@
-<p-card [header]="product.name" [subheader]="'Price: ' + product.price">
+<p-card
+  [header]="product.name | truncateName : 15"
+  [subheader]="'Price: ' + (product.price | price)"
+>
   <ng-template pTemplate="header">
     <img [src]="product.image" alt="Product thumbnail" />
   </ng-template>
