@@ -1,21 +1,32 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
-import { PaginationParams, ProductsResponse } from '../../types';
+import { PaginationParams, Product, ProductsResponse } from '../../types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) {
+    apiService.setBaseURL('http://localhost:3000/'); //TODO: env
+  }
 
-  getProducts = (
-    url: string,
-    params: PaginationParams
-  ): Observable<ProductsResponse> => {
-    return this.apiService.get(url, {
+  getProducts = (params: PaginationParams): Observable<ProductsResponse> => {
+    return this.apiService.get('clothes', {
       params,
       responseType: 'json',
     });
+  };
+
+  addProduct = (body: Product): Observable<ProductsResponse> => {
+    return this.apiService.post('clothes', body, {});
+  };
+
+  editProduct = (body: Product): Observable<ProductsResponse> => {
+    return this.apiService.put(`clothes/${body.id}`, body, {});
+  };
+
+  deleteProduct = (id: number): Observable<ProductsResponse> => {
+    return this.apiService.delete(`clothes/${id}`, {});
   };
 }
